@@ -19,12 +19,11 @@ System.out.println("Создайте список заказов с разным
         System.out.println(ordersInfo);
 
 System.out.println("Группируйте заказы по продуктам.:");
-        List<String> groupAndSortOrders = orders.stream()
+        List<Order> groupAndSortOrders = orders.stream()
                 .collect(Collectors.groupingBy(Order::product))
                 .values().stream()
                 .flatMap(productOrders -> productOrders.stream()
                         .sorted(Comparator.comparingDouble(Order::cost).reversed()))
-                .map(Order::toString)
                 .toList();
 
         groupAndSortOrders.forEach(System.out::println);
